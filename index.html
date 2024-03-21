@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>edi</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="chekFileFletSupdes.js"></script>
+    <script type="text/javascript" src="chekFileHashavshevtSupdes.js"></script>
+    <script type="text/javascript" src="Contrast.js"></script>
+    <script type="text/javascript" src="chekFileFletOrder.js"></script>
+    <script type="text/javascript" src="supdesFlat.js"></script>
+    <script type="text/javascript" src="supdesHashavshevt.js"></script>
+    <!--    Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<!--Activation of the test by an event when the user presses enter-->
+
+<body class="body" >
+    <!-- onkeydown="checkEnter(event)" -->
+
+    <label class="toggle-container">
+        <input type="checkbox" onclick="toggleFunction()">
+
+        <span class="toggle-slider"></span>
+    </label>
+    <p id="screenMode">screen mode</p>
+
+
+
+
+
+
+    <!--select of message types-->
+    <div class="AllData">
+    </div>
+
+
+
+
+
+    <!--message Ruslt-->
+    <div id="messageRuslt1">
+
+        <h1 class="reulstTest">תוצאות הבדיקה</h1>
+        <div id="main">
+            <h2>ראשי</h2>
+            <p id="messageRuslt"></p>
+        </div>
+
+
+        <div id="constantValues">
+            <h2>ערכים קבועים</h2>
+        </div>
+
+        <div id="barcodes">
+            <h2>ברקודים ומשטחים</h2>
+        </div>
+
+
+    </div>
+
+
+
+    <!--message Ruslt eror-->
+    <div id="erorWindos">
+    </div>
+
+
+
+
+
+
+    <!--up file input+drop-->
+    <div class="upFile">
+        <h1 id="titelFile">קבצים</h1>
+        <div class="files">
+            <!--drop file+up file-->
+            <div id="drop-zone" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                <!--Paragraph of the initial screen-->
+                <div class="titelUpFile" style="display: block">
+                    <h1 style="font-size: 40px;color: #858a85;position: relative;right: 6px" id="titelUpFileH"> ברוכים
+                        הבאים למסך EDI בדיקות
+                        מסרי </h1>
+                    <p7 style="font-size:23px;color: #858a85;position: relative;top:-20px;right: 9px" id="titelUpFileP">
+                        אנא בחרו או גררו קובץ
+                        שברצונכם לבדוק
+                    </p7>
+                </div>
+                <!--Upload button-->
+                <button id="upload-icon" onclick="triggerFileInput()"></button>
+                <!--File upload icon+css-->
+                <div class="iconAndhandleDrop">
+                    <i class="material-icons upload-icon" id="icons" onclick="triggerFileInput()">cloud_upload</i>
+                    <p style="position: relative;top:-10px;font-size: 20px;" id="iconAndhandleDropP"
+                        onclick="triggerFileInput()">גרור קובץ לכאן
+                        <br>או
+                    </p>
+                </div>
+                <!--     Just the button's div-->
+                <button id="upload-iconDiv" onclick="triggerFileInput()">בחר קובץ</button>
+                <!--The name of the uploaded file+css-->
+                <div id="file-name" style=" display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 0px;
+      position: relative;
+      top: 49%;
+      /*right: 250px;*/
+      font-size: 15px;
+      color: #ff0000;
+    display: none;"></div>
+            </div>
+            <!--input to select a file-->
+            <input type="file" id="file-input" onchange="handleFileInput(event)" />
+        </div>
+
+    </div>
+
+
+    <!--input the file-->
+    <textarea id="fileChek"></textarea>
+    <!--Row and Column-->
+    <div id="RowColumn"></div>
+
+
+
+
+
+
+    <!--eror type mass-->
+    <!-- <div id="erorMss">
+        <p id="erorP"></p>
+         <select id="erorMssSelectStructure" name="erorMssSelectStructure">
+            <option value="">מבנה המסר</option>
+            <option value="hashavshevt">חשבשבת</option>
+            <option value="Flat">Flat file</option>
+        </select> -->
+
+        <!-- <select id="erorMssSelect" name="erorMssSelect">
+            <option value="">סוג מסר</option>
+            <option value="supdes">משלוח</option>
+            <option value="order">הזמנה</option>
+            <option value="entry">כניסה</option>
+            <option value="return">החזרה</option>
+        </select> -->
+
+        <!-- <button id="buttonEror" onclick="document.getElementById('erorMss').style.display= 'none'">סגור</button> -->
+    <!-- </div> --> 
+
+
+
+</div>
+    
+
+
+    <script>
+
+
+
+        const textarea = document.getElementById("fileChek");
+        const output = document.getElementById("RowColumn");
+
+        textarea.addEventListener("mousemove", function (event) {
+            const cursorPosition = textarea.selectionStart;
+            const text = textarea.value;
+            const row = text.substr(0, cursorPosition).split("\n").length;
+            const col = cursorPosition - text.lastIndexOf("\n", cursorPosition - 1);
+
+            output.textContent = `Row: ${row}, Column: ${col}`;
+        });
+
+
+
+
+
+        function toggleFunction() {
+            var checkBox = document.querySelector('input[type="checkbox"]');
+            if (checkBox.checked) {
+                darkMode();
+
+            } else {
+                brightMode();
+            }
+
+        }
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
