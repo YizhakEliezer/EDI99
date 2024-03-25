@@ -118,7 +118,7 @@ async function supdesFlat() {
     //Checking whether there are no errors in the constantValues div If not, the div will be raised from the screen
     var constantValuesStyle = document.getElementById('constantValues');
     if (!constantValuesStyle.innerHTML.includes('<p>')) {
-        console.log('No paragraphs found in the div.');
+        // console.log('No paragraphs found in the div.');
         constantValuesStyle.style.display = "none";
     }
 

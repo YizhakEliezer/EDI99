@@ -25,10 +25,8 @@ function handleFileInput(event) {
 //name file+format file
 function handleFiles(files) {
 
-    try {
-        const errorMss = document.getElementById('errorMssTypeFlat');
-        errorMss.remove();
-    } catch (e) { }
+    removeErrorMessageById("errorMssTypeFlat");
+    removeErrorMessageById("errorMssType");
 
     //format file
     const allowedTypes = ['text/plain', '', 'application/msword',];
@@ -78,6 +76,10 @@ let selectCreated = false;
 let selectedOption = null;
 
 
+let selectCreatedType = false;
+let selectedOptionType = null;
+let selectedOptionType1 = null;
+
 // Define the function to check textarea value and execute actions accordingly
 function checkTextarea() {
     const fileChekValue = document.getElementById("fileChek").value;
@@ -86,30 +88,150 @@ function checkTextarea() {
         if (fileChekValue.includes("SUPDES")) {
             selectedOption = null;
             selectCreated = false;
-            try {
-                const errorMss = document.getElementById('errorMssTypeFlat');
-                errorMss.remove();
-            } catch (e) { }
+            removeErrorMessageById("errorMssTypeFlat");
+            removeErrorMessageById("errorMssType");
+
 
             supdesFlat();
         }
          else {
+            removeErrorMessageById("errorMssType");
             if (!selectCreated) {
+                addSelect();
+            } 
+            
+            else {
+                runSelectedFunction(); // Run the function when the select value changes
+            }
 
 
-                const errorMss = document.createElement('div');
-                errorMss.id = 'errorMssTypeFlat';
-                document.body.appendChild(errorMss);
+        }
+    } 
+    
+    
+    
+    
+    
+    else {
+        selectCreated = false;
+        if (!selectCreatedType) {
+            addSelectType();
+              }
+              
+              else{
+                runSelectedFunctionType(); 
+              }
 
-                const errMssP = document.createElement('p');
-                errMssP.id = 'errorp';
-                errMssP.innerHTML = "נראה שהתעודה שנבחרה ללא סוג מסר רצוי לבדיקה , או שהערך של 'סוג תעודה' במסר שגוי";
-                errMssP.innerHTML += "<br>" + "אנא בחר את סוג התעודה לבדיקה  ";
+    }
 
-                const typeSelect = document.createElement("select");
-                typeSelect.id = "errorMssSelect";
-                errorMss.appendChild(errMssP);
-                errorMss.appendChild(typeSelect);
+
+
+}
+
+
+
+function addSelect(){
+
+
+    const errorMss = document.createElement('div');
+    errorMss.id = 'errorMssTypeFlat';
+    document.body.appendChild(errorMss);
+
+    const errMssP = document.createElement('p');
+    errMssP.id = 'errorp';
+    errMssP.innerHTML = "נראה שהתעודה שנבחרה ללא סוג מסר רצוי לבדיקה , או שהערך של 'סוג תעודה' במסר שגוי";
+    errMssP.innerHTML += "<br>" + "אנא בחר את סוג התעודה לבדיקה  ";
+
+    const typeSelect = document.createElement("select");
+    typeSelect.id = "errorMssSelect";
+    errorMss.appendChild(errMssP);
+    errorMss.appendChild(typeSelect);
+
+    const optionType = document.createElement("option");
+    const optionSupdes = document.createElement("option");
+    const optionOrder = document.createElement("option");
+    const entry = document.createElement("option");
+
+    optionType.innerHTML = "סוג תעודה";
+    optionSupdes.innerHTML = "משלוח";
+    optionOrder.innerHTML = "הזמנה";
+    entry.innerHTML = "כניסה";
+
+
+    optionSupdes.value = "supdes";
+    optionOrder.value = "order";
+    entry.value = "entry";
+
+    typeSelect.appendChild(optionType);
+    typeSelect.appendChild(optionSupdes);
+    typeSelect.appendChild(optionOrder);
+    typeSelect.appendChild(entry);
+
+    
+
+
+    typeSelect.addEventListener("change", function() {
+        selectedOption = this.value;
+        runSelectedFunction(); // Run the function when the select value changes
+        removeErrorMessageById("errorMssTypeFlat");
+    });
+
+    selectCreated = true;
+
+}
+
+
+
+function addSelectType(){
+
+
+     const errorMss = document.createElement('div');
+            errorMss.id = 'errorMssType';
+            document.body.appendChild(errorMss);
+
+            const errMssP = document.createElement('p');
+            errMssP.id = 'errorpType';
+            errMssP.innerHTML = "נראה שהתעודה שנבחרה ללא סוג מבנה רצוי לבדיקה , או שהערך של 'מבנה התעודה' במסר שגוי";
+            errMssP.innerHTML += "<br>" + "אנא בחר את מבנה התעודה לבדיקה  ";
+
+
+            
+            const typeSelectStructure = document.createElement("select");
+            typeSelectStructure.id = "errorMssSelectTypeStructure";
+            errorMss.appendChild(errMssP);
+            errorMss.appendChild(typeSelectStructure);
+
+            const optionTypeStructure = document.createElement("option");
+            const optionFlat = document.createElement("option");
+            const optionHashavshevt = document.createElement("option");
+            const optionXml = document.createElement("option");
+
+            optionTypeStructure.innerHTML = "מבנה התעודה";
+            optionFlat.innerHTML = "Flat file";
+            optionHashavshevt.innerHTML = "חשבשבת";
+            optionXml.innerHTML = "xml";
+
+
+            optionFlat.value = "Flat file";
+            optionHashavshevt.value = "חשבשבת";
+            optionXml.value = "xml";
+
+            typeSelectStructure.appendChild(optionTypeStructure);
+            typeSelectStructure.appendChild(optionFlat);
+            typeSelectStructure.appendChild(optionHashavshevt);
+            typeSelectStructure.appendChild(optionXml);
+
+
+
+
+
+
+
+
+            const typeSelect = document.createElement("select");
+            typeSelect.id = "errorMssSelectType";
+            errorMss.appendChild(errMssP);
+            errorMss.appendChild(typeSelect);
 
                 const optionType = document.createElement("option");
                 const optionSupdes = document.createElement("option");
@@ -133,29 +255,45 @@ function checkTextarea() {
 
 
 
-                typeSelect.addEventListener("change", function() {
-                    selectedOption = this.value;
-                    runSelectedFunction(); // Run the function when the select value changes
-                    try {
-                        const errorMss = document.getElementById('errorMssTypeFlat');
-                        errorMss.remove();
-                    } catch (e) { }
+
+            
+
+                typeSelectStructure.addEventListener("change", function() {
+                    selectedOptionType = this.value;
+                    runSelectedFunctionType();
+                    
                 });
 
-                selectCreated = true;
-            } 
-            
-            else {
-                runSelectedFunction(); // Run the function when the select value changes
-            }
-        }
-    } else {
-        // Reset selectCreated flag if the condition is not met
-        selectCreated = false;
-        // Deletion of the options of choosing from multiple certificates before each test
-        // supdesHashavshevt();
-    }
+                typeSelect.addEventListener("change", function() {
+                    selectedOptionType1 = this.value;
+                    runSelectedFunctionType(); 
+                    removeErrorMessageById("errorMssType");
+                });
+
+                selectCreatedType= true;
+                selectCreatedType1= true;
+
 }
+
+
+
+function runSelectedFunctionType() {
+    // const typeSelectStructure = document.getElementById("errorMssSelectTypeStructure");
+    // const typeSelect = document.getElementById("errorMssSelectType");
+
+    if (selectedOptionType === "Flat file" && selectedOptionType1==="supdes") {
+        supdesFlat();
+        console.log("Flat file + supdes");
+    } else {
+        console.log("no");
+    }
+
+
+}
+
+
+
+
 
 // Function to run the appropriate action based on the selected option
 function runSelectedFunction() {
@@ -168,11 +306,36 @@ function runSelectedFunction() {
     }
 }
 
+
+
+
+
+
+
 // Invoke the function once
 checkTextarea();
 
 // Add event listener for further input changes
 document.getElementById("fileChek").addEventListener("input", checkTextarea);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -190,6 +353,22 @@ document.getElementById("fileChek").addEventListener("input", checkTextarea);
 
 
 
+
+function removeErrorMessageById(id) {
+    try {
+        const errorMss = document.getElementById(id);
+        if (errorMss) {
+            errorMss.remove();
+        }
+    } catch (e) { 
+        console.error("Error removing error message:", e);
+    }
+}
+
+
+
+
+ 
 
 
 
