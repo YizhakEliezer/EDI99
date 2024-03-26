@@ -1,12 +1,12 @@
 async function supdesFlat() {
 
-
+   
     //Compare the variable obtained from the file with the value in the input
     fileContent = fileChek.value;
     //split the value to line
     const lines = fileContent.split('\n');
 
-
+    removeElemntmessageRuslt();
 
 
 
@@ -85,7 +85,7 @@ async function supdesFlat() {
     const numSupplierSubnetNumberFromeDocument = lines[1].substring(104, 119);
     const numBranchRetailerFromeDocument = lines[1].substring(154, 169);
     //valueFromFile line 3
-    const StartOfLineLINE0001 = lines[2].substring(0, 8);
+        const StartOfLineLINE0001 = lines[2].substring(0, 8);
     //valueFromFile One line before last
     const StartOfLineHEAD9901 = lines[lines.length - 2].substring(0, 8);
     //valueFromFile last line
@@ -124,6 +124,12 @@ async function supdesFlat() {
 
 
 
+      //Checking whether there are no errors in the barcodes div If not, the div will be raised from the screen
+      var barcodesStyle = document.getElementById('barcodes');
+      if (!barcodesStyle.innerHTML.includes('<p>')) {
+          // console.log('No paragraphs found in the div.');
+          barcodesStyle.style.display = "none";
+      }
 
 
 
@@ -139,21 +145,17 @@ async function supdesFlat() {
 
 
 
-    //type mass line 1, 33-47  main div
-    if (!compareStringsIgnoreCaseAndSpace(typeDocument, SUPDES)) {
-        try {
-            typeDocumentomHtmlEror.remove();
-            typeDocumentFromeHtml.remove();
-        } catch (e) { }
+      //type mass line 1, 33-47  main div
+      if (!compareStringsIgnoreCaseAndSpace(typeDocument, SUPDES)) {
+        removeErrorMessageById("typeDocumentomHtmlEror");
+        removeErrorMessageById("typeDocumentFromeHtml");
         messageRusltconstantValuesMain("typeDocumentFromeHtml", "typeDocumentomHtmlEror");
-        typeDocumentomHtmlEror.innerHTML = "33-47 , חסר או שגוי ,שורה 1 " + typeDocument + " ערך";
+        typeDocumentomHtmlEror.innerHTML = "33-47 ,ערך חסר או שגוי ,שורה 1 " +"<br>"+" :ערך שנמצא בקובץ "+"<br>"+typeDocument+"<br>"+": ערך רצוי"+"<br>"+SUPDES ;
         typeDocumentFromeHtml.innerHTML = "סוג תעודה: משלוח"
         iconX(typeDocumentFromeHtml);
     } else {
-        try {
-            typeDocumentomHtmlEror.remove();
-            typeDocumentFromeHtml.remove();
-        } catch (e) { }
+        removeErrorMessageById("typeDocumentomHtmlEror");
+        removeErrorMessageById("typeDocumentFromeHtml");
         messageRusltconstantValuesMain("typeDocumentFromeHtml", "typeDocumentomHtmlEror");
         typeDocumentFromeHtml.innerHTML = "סוג תעודה: משלוח"
         iconV(typeDocumentFromeHtml);
@@ -169,27 +171,22 @@ async function supdesFlat() {
 
 
 
+   //num mass line 1, 8-23  main div
+   if (numMessageFromeDocument.trim() === "") {
+    removeErrorMessageById("numMessageFromHtmlEror");
+    removeErrorMessageById("numMessageFromHtml");
+    messageRusltconstantValuesMain("numMessageFromHtml", "numMessageFromHtmlEror");
+    numMessageFromHtmlEror.innerHTML = "8-23 , ערך של מספר תעודה  חסר ,שורה 2";
+    numMessageFromHtml.innerHTML ="מספר תעודה: חסר";
+    iconX(numMessageFromHtml);
+} else {
+    removeErrorMessageById("numMessageFromHtmlEror");
+    removeErrorMessageById("numMessageFromHtml");
+    messageRusltconstantValuesMain("numMessageFromHtml", "numMessageFromHtmlEror");
+    numMessageFromHtml.innerHTML =numMessageFromeDocument+ " :מספר  תעודה";
+    iconV(numMessageFromHtml);
 
-    //num mass line 1, 33-47  main div
-    if (numMessageFromeDocument.trim() === "") {
-        try {
-            numMessageFromHtmlEror.remove();
-            numMessageFromHtml.remove();
-        } catch (e) { }
-        messageRusltconstantValuesMain("numMessageFromHtml", "numMessageFromHtmlEror");
-        numMessageFromHtmlEror.innerHTML = "8-23 , ערך של מספר תעודה  חסר ,שורה 2";
-        numMessageFromHtml.innerHTML = "מספר  תעודה : " + numMessageFromeDocument;
-        iconX(numMessageFromHtml);
-    } else {
-        try {
-            numMessageFromHtmlEror.remove();
-            numMessageFromHtml.remove();
-        } catch (e) { }
-        messageRusltconstantValuesMain("numMessageFromHtml", "numMessageFromHtmlEror");
-        numMessageFromHtml.innerHTML = "מספר  תעודה : " + numMessageFromeDocument;
-        iconV(numMessageFromHtml);
-
-    }
+}
 
 
 
@@ -201,51 +198,49 @@ async function supdesFlat() {
 
 
 
-    //date mass line 2, 23-35  main div
-
-    try {
-        dateTimeHtmlEror.remove();
-        dateTimeHtml.remove();
-    } catch (e) { }
+  
+    //date mass line 2, 23-55  main div
+    removeErrorMessageById("dateTimeHtmlEror");
+    removeErrorMessageById("dateTimeHtml");
     messageRusltconstantValuesMain("dateTimeHtml", "dateTimeHtmlEror");
  
     if (booleneLength === false || isNaN(booleneLength)) {
         iconXTime(dateTimeHtml);
-        dateTimeHtmlEror.innerHTML = ", פורמט תאריך  שגוי , מספר התווים או מיקום התאריך בקובץ שגוי    "+"<br>"+"  23-35  ,שורה 2" ;
+        dateTimeHtmlEror.innerHTML = "<br>"+", פורמט תאריך הזמנה  שגוי , מספר התווים או מיקום התאריך בקובץ שגוי "+"<br>"+"  53-65 ,שורה 2" +"<br>";
     } 
       if (year < 2023 || isNaN(year) || timeDocument.substring(0, 4)==="") {
         iconXTime(dateTimeHtml);
-        dateTimeHtmlEror.innerHTML +="<br>"+ "23-35 , פורמט תאריך שנה שגוי  ,שורה 2";
+        dateTimeHtmlEror.innerHTML +="<br>"+ "53-65 , פורמט תאריך שנה שגוי  ,שורה 2" +"<br>";
     }
 
       if (month < 1 || month > 12 || isNaN(month) || timeDocument.substring(4, 6)==="") {
         iconXTime(dateTimeHtml);
-        dateTimeHtmlEror.innerHTML +="<br>"+ "23-35 , פורמט תאריך חודש שגוי  ,שורה 2";
+        dateTimeHtmlEror.innerHTML +="<br>"+"פורמט תאריך חודש שגוי,שורה 2, 53-65" +"<br>"+" :ערך שנמצא בקובץ "+"<br>"+timeDocument.substring(4, 6)+"<br>"+": ערך רצוי"+"<br>"+"12>month>1"  +"<br>";
     }
 
       if (day < 1 || day > 31 || isNaN(day) || timeDocument.substring(6, 8)==="") {
         iconXTime(dateTimeHtml);
-        dateTimeHtmlEror.innerHTML +="<br>"+ "23-35 , פורמט תאריך יום שגוי  ,שורה 2";
+        dateTimeHtmlEror.innerHTML +="<br>"+"פורמט תאריך יום שגוי,שורה 2, 53-65" +"<br>"+" :ערך שנמצא בקובץ "+"<br>"+timeDocument.substring(6, 8)+"<br>"+": ערך רצוי"+"<br>"+"31>day>1" +"<br>" ;
+
     }
 
       if (hour < 0 || hour > 24 || isNaN(hour) || timeDocument.substring(8, 10)==="") {
         iconXTime(dateTimeHtml);
-        dateTimeHtmlEror.innerHTML +="<br>"+ "23-35 , פורמט תאריך שעה שגוי  ,שורה 2";
+        dateTimeHtmlEror.innerHTML +="<br>"+"פורמט תאריך שעה שגוי,שורה 2, 53-65" +"<br>"+" :ערך שנמצא בקובץ "+"<br>"+timeDocument.substring(8, 10)+"<br>"+": ערך רצוי"+"<br>"+"24>hour>0" +"<br>" ;
+
     }
     
       if(minute < 0 || minute > 59 || isNaN(minute) || timeDocument.substring(10, 12)==="" ) {
         iconXTime(dateTimeHtml);
-        dateTimeHtmlEror.innerHTML +="<br>"+ "23-35 , פורמט תאריך דקה שגוי  ,שורה 2";
+        dateTimeHtmlEror.innerHTML +="<br>"+"פורמט תאריך דקה שגוי,שורה 2, 53-65" +"<br>"+" :ערך שנמצא בקובץ "+"<br>"+timeDocument.substring(10, 12)+"<br>"+": ערך רצוי"+"<br>"+"59>minute>0"  +"<br>";
+
        
     }
 
-
-
-    dateTimeHtml.innerHTML += "תאריך  תעודה : " + day + "/" + month + "/" + year + "-" + hour + ":" + minute;
+    dateTimeHtml.innerHTML +=day + "/" + month + "/" + year + "-" + hour + ":" + minute +" :תאריך  תעודה";
     dateTimeHtml.style.right ="32px";
 
 
-    
     var dateTimeHtml1 = document.getElementById('dateTimeHtml');
     var icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
     if (icons.length > 0) {
@@ -270,10 +265,8 @@ async function supdesFlat() {
     response.forEach(item => {
         if (NumReceivingFromeDocument.trim() === item.value) {
             valueKey = item.key;
-            try {
-                NumReceivingFromeDocumentHtml.remove();
-                NumReceivingFromeDocumentEror.remove();
-            } catch (e) { }
+            removeErrorMessageById("NumReceivingFromeDocumentHtml");
+            removeErrorMessageById("NumReceivingFromeDocumentEror");
             messageRusltconstantValuesMain("NumReceivingFromeDocumentHtml", "NumReceivingFromeDocumentEror");
             NumReceivingFromeDocumentHtml.innerHTML = "שם הרשת : " + item.key + " , " + NumReceivingFromeDocument;
             iconV(NumReceivingFromeDocumentHtml);
@@ -290,16 +283,13 @@ async function supdesFlat() {
         iconV(NumReceivingFromeDocumentHtml);
     }
     if (valueKey === "") {
-        try {
-            NumReceivingFromeDocumentHtml.remove();
-            NumReceivingFromeDocumentEror.remove();
-        } catch (e) { }
+        removeErrorMessageById("NumReceivingFromeDocumentHtml");
+        removeErrorMessageById("NumReceivingFromeDocumentEror");
         messageRusltconstantValuesMain("NumReceivingFromeDocumentHtml", "NumReceivingFromeDocumentEror");
         NumReceivingFromeDocumentHtml.innerHTML = NumReceivingFromeDocument + " , " + "שם הרשת : " + "רשת לא ידועה";
-        NumReceivingFromeDocumentEror.innerHTML = "רשת לא ידועה ,שורה 1, 8-23";
         iconX(NumReceivingFromeDocumentHtml);
     }
-
+    NumReceivingFromeDocumentEror.innerHTML = "רשת לא ידועה ,שורה 1, 8-23";
 
 
 
@@ -333,10 +323,9 @@ async function supdesFlat() {
         } catch (e) { }
         messageRusltconstantValuesMain("numBranchRetailerFromeDocumentHtml", "numBranchRetailerFromeDocumentHtmlEror");
         numBranchRetailerFromeDocumentHtml.innerHTML = numBranchRetailerFromeDocument + " , " + "שם הסניף : " + "סניף לא ידוע";
-        numBranchRetailerFromeDocumentHtmlEror.innerHTML = "סניף לא ידוע ,שורה 2, 154-169";
         iconX(numBranchRetailerFromeDocumentHtml);
     }
-
+    numBranchRetailerFromeDocumentHtmlEror.innerHTML = "סניף לא ידוע ,שורה 2, 154-169";
 
 
 
@@ -351,10 +340,8 @@ async function supdesFlat() {
     responseSender.forEach(item => {
         if (numSenderFromeDocument.trim() === item.value) {
             valueKeySender = item.key;
-            try {
-                numSenderFromeDocumentHtml.remove();
-                numSenderFromeDocumentEror.remove();
-            } catch (e) { }
+            removeErrorMessageById("numSenderFromeDocumentHtml");
+            removeErrorMessageById("numSenderFromeDocumentEror");
             messageRusltconstantValuesMain("numSenderFromeDocumentHtml", "numSenderFromeDocumentEror");
             numSenderFromeDocumentHtml.innerHTML = "שם הספק : " + item.key + " , " + numSenderFromeDocument;
             iconV(numSenderFromeDocumentHtml);
@@ -362,15 +349,13 @@ async function supdesFlat() {
     });
 
     if (valueKeySender === "") {
-        try {
-            numSenderFromeDocumentHtml.remove();
-            numSenderFromeDocumentEror.remove();
-        } catch (e) { }
+        removeErrorMessageById("numSenderFromeDocumentHtml");
+        removeErrorMessageById("numSenderFromeDocumentEror");
         messageRusltconstantValuesMain("numSenderFromeDocumentHtml", "numSenderFromeDocumentEror");
         numSenderFromeDocumentHtml.innerHTML = NumReceivingFromeDocument + " , " + "שם הספק : " + "ספק לא ידוע";
-        numSenderFromeDocumentEror.innerHTML = "ספק לא ידוע ,שורה 1, 49-64";
         iconX(numSenderFromeDocumentHtml);
     }
+    numSenderFromeDocumentEror.innerHTML = "ספק לא ידוע ,שורה 1, 49-64";
 
 
 
@@ -434,20 +419,16 @@ async function supdesFlat() {
 
     //StartOfLineENV00101 line 1, 0-8  constantValues div
     if (!compareStringsIgnoreCaseAndSpace(StartOfLineENV00101, ENV00101)) {
-        try {
-            ENV001011.remove();
-            ENV00101Eror.remove();
-        } catch (e) { }
+        removeErrorMessageById("ENV001011");
+        removeErrorMessageById("ENV00101Eror");
         messageRusltconstantValues("ENV001011", "ENV00101Eror");
         ENV001011.innerHTML += "שגוי ENV00101" + "<br>";
-        ENV00101Eror.innerHTML = "0-8 , חסר או שגוי, שורה 1 " + StartOfLineENV00101 + " ערך";
+        ENV00101Eror.innerHTML = "0-8 ,ערך חסר או שגוי ,שורה 1 " +"<br>"+" :ערך שנמצא בקובץ "+"<br>"+StartOfLineENV00101+"<br>"+": ערך רצוי"+"<br>"+ENV00101 ;
         iconX(ENV001011);
     }
     else {
-        try {
-            ENV001011.remove();
-            ENV00101Eror.remove();
-        } catch (e) { }
+        removeErrorMessageById("ENV001011");
+        removeErrorMessageById("ENV00101Eror");
     }
 
 
@@ -455,19 +436,16 @@ async function supdesFlat() {
 
     //nameDocument line 1, 23-33    constantValues div
     if (!compareStringsIgnoreCaseAndSpace(nameDocument1, MMDE02R) && !compareStringsIgnoreCaseAndSpace(nameDocument2, MMDE02L)) {
-        try {
-            MMDE02RMMDE02L.remove();
-            MMDE02RMMDE02LEror.remove();
-        } catch (e) { }
+        removeErrorMessageById("MMDE02RMMDE02L");
+        removeErrorMessageById("MMDE02RMMDE02LEror");
         messageRusltconstantValues("MMDE02RMMDE02L", "MMDE02RMMDE02LEror");
         MMDE02RMMDE02L.innerHTML += "שגוי MMDE02R/MMDE02L" + "<br>";
-        MMDE02RMMDE02LEror.innerHTML = "23-33 , חסר או שגוי, שורה 1  " + nameDocument1 + " ערך";
+        MMDE02RMMDE02LEror.innerHTML = "23-33 ,ערך חסר או שגוי ,שורה 1 " +"<br>"+" :ערך שנמצא בקובץ "+"<br>"+nameDocument1+"<br>"+": ערך רצוי"+"<br>"+MMDE02L+"/"+MMDE02R ;
+
         iconX(MMDE02RMMDE02L);
     } else {
-        try {
-            MMDE02RMMDE02L.remove();
-            MMDE02RMMDE02LEror.remove();
-        } catch (e) { }
+        removeErrorMessageById("MMDE02RMMDE02L");
+        removeErrorMessageById("MMDE02RMMDE02LEror");
     }
 
 
@@ -479,20 +457,16 @@ async function supdesFlat() {
 
     //StartOfLineHEAD0101 line 2, 0-8  constantValues div
     if (!compareStringsIgnoreCaseAndSpace(StartOfLineHEAD0101, HEAD0101)) {
-        try {
-            HEAD01011.remove();
-            HEAD0101Eror.remove();
-        } catch (e) { }
+        removeErrorMessageById("HEAD01011");
+        removeErrorMessageById("HEAD0101Eror");
         messageRusltconstantValues("HEAD01011", "HEAD0101Eror");
         HEAD01011.innerHTML += "שגוי HEAD0101" + "<br>";
-        HEAD0101Eror.innerHTML = "0-8 , חסר או שגוי, שורה 2 " + StartOfLineHEAD0101 + " ערך";
+        HEAD0101Eror.innerHTML = "0-8 ,ערך חסר או שגוי ,שורה 2 " +"<br>"+" :ערך שנמצא בקובץ "+"<br>"+StartOfLineHEAD0101+"<br>"+": ערך רצוי"+"<br>"+HEAD0101 ;
         iconX(HEAD01011);
     }
     else {
-        try {
-            HEAD01011.remove();
-            HEAD0101Eror.remove();
-        } catch (e) { }
+        removeErrorMessageById("HEAD01011");
+        removeErrorMessageById("HEAD0101Eror");
     }
 
 
@@ -832,7 +806,6 @@ function colorBorder() {
     }
 
 }
-
 
 
 

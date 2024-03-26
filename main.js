@@ -90,12 +90,25 @@ function checkTextarea() {
             selectCreated = false;
             removeErrorMessageById("errorMssTypeFlat");
             removeErrorMessageById("errorMssType");
-
+          
 
             supdesFlat();
         }
-         else {
+
+        else if(fileChekValue.includes("MMOR01")){
+            selectedOption = null;
+            selectCreated = false;
+            removeErrorMessageById("errorMssTypeFlat");
             removeErrorMessageById("errorMssType");
+                //  console.log("MMOR01");
+                
+                 orderFlat();
+
+        }
+
+         else {
+             removeErrorMessageById("errorMssType");
+            
             if (!selectCreated) {
                 addSelect();
             } 
@@ -114,6 +127,10 @@ function checkTextarea() {
     
     else {
         selectCreated = false;
+
+        removeErrorMessageById("errorMssTypeFlat");
+        removeErrorMessageById("errorMssType");
+        
         if (!selectCreatedType) {
             addSelectType();
               }
@@ -282,9 +299,18 @@ function runSelectedFunctionType() {
     // const typeSelect = document.getElementById("errorMssSelectType");
 
     if (selectedOptionType === "Flat file" && selectedOptionType1==="supdes") {
+        removeElemntmessageRuslt();
         supdesFlat();
         console.log("Flat file + supdes");
-    } else {
+    } 
+    
+    else if (selectedOptionType === "Flat file" && selectedOptionType1 === "order") {
+        removeElemntmessageRuslt();
+         orderFlat();
+    } 
+    
+    
+    else {
         console.log("no");
     }
 
@@ -298,10 +324,13 @@ function runSelectedFunctionType() {
 // Function to run the appropriate action based on the selected option
 function runSelectedFunction() {
     if (selectedOption === "supdes") {
+       
         supdesFlat();
     } else if (selectedOption === "order") {
-        console.log("order");
-    } else if (selectedOption === "entry") {
+       
+         orderFlat();
+    } 
+    else if (selectedOption === "entry") {
         console.log("entry");
     }
 }
@@ -357,17 +386,30 @@ document.getElementById("fileChek").addEventListener("input", checkTextarea);
 function removeErrorMessageById(id) {
     try {
         const errorMss = document.getElementById(id);
-        if (errorMss) {
+        // if (errorMss) {
             errorMss.remove();
-        }
+        // }
     } catch (e) { 
-        console.error("Error removing error message:", e);
+        // console.error("Error removing error message:", e);
     }
 }
 
 
 
 
+
+
+
+
+function removeElemntmessageRuslt(){
+    var container = document.getElementById('messageRuslt1');
+    var elementsToRemove = container.querySelectorAll(':not(h2):not(#main):not(#constantValues):not(#barcodes)');
+    
+    elementsToRemove.forEach(function(element) {
+        element.remove();
+    });
+    
+}
  
 
 
