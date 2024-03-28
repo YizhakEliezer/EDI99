@@ -39,7 +39,7 @@ function handleFiles(files) {
 
     //name file
     const fileName = files[0].name;
-    document.getElementById('file-name').innerText = ` ${fileName} :קובץ נקלט  `;
+    document.getElementById('file-name').innerText = ` ${fileName}  `;
     checkForValue(files[0]);
 }
 
@@ -476,13 +476,101 @@ function messageRusltconstantValuesMain(idValue, idValueEror) {
 
 
 
+// function messageRusltBarcodes(idValue, idValueEror) {
+
+    // const barcodes = document.getElementById('barcodes');
+    // const constantValues = document.getElementById('barcodesTable');
+    // barcodes.style.display = "block"
+
+    // const constantValuesTr = document.createElement('tr');
+    // constantValuesTr.id = idValue;
+
+    // const constantValuesT = document.createElement('td');
+    // constantValuesT.id = idValue + "Y";
+
+    // const constantValuesA = document.createElement('td');
+    // constantValuesA.id = idValue + "A";
+
+    // const constantValuesM = document.createElement('td');
+    // constantValuesM.id = idValue + "M";
+
+    // const constantValuesY = document.createElement('td');
+    // constantValuesY.id = idValue + "T";
+
+
+    // constantValues.appendChild(constantValuesTr);
+
+
+    // constantValuesTr.appendChild(constantValuesT);
+    // constantValuesTr.appendChild(constantValuesM);
+    // constantValuesTr.appendChild(constantValuesA);
+    // constantValuesTr.appendChild(constantValuesY);
+
+
+    // const idValueE = document.getElementById(idValue);
+
+
+    // const erorWindos = document.getElementById('erorWindos');
+    // const erorWindosDiv = document.createElement('div');
+    // erorWindosDiv.id = idValueEror;
+    // erorWindos.appendChild(erorWindosDiv);
+
+
+
+
+    // const idValueA = document.getElementById(idValue + "A");
+
+    // const erorWindosDivA = document.createElement('div');
+    // erorWindosDivA.id = idValueEror + "A";
+    // erorWindos.appendChild(erorWindosDivA);
+
+
+    
+
+
+
+
+
+    // idValueE.setAttribute("onmouseover", "showTooltip(" + "'" + idValue + "'" + "," + "'" + idValueEror + "'" + ")");
+    // idValueE.setAttribute("onmouseout", "hideTooltip(" + "'" + idValueEror + "'" + ")");
+
+
+    // idValueA.setAttribute("onmouseover", "showTooltip(" + "'" + idValue + "A" + "'" + "," + "'" + idValueEror + "A" + "'" + ")");
+    // idValueA.setAttribute("onmouseout", "hideTooltip(" + "'" + idValueEror + "A" + "'" + ")");
+
+
+
+
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function messageRusltBarcodes(idValue, idValueEror) {
+
     const barcodes = document.getElementById('barcodes');
     const constantValues = document.getElementById('barcodesTable');
     barcodes.style.display = "block"
 
     const constantValuesTr = document.createElement('tr');
     constantValuesTr.id = idValue;
+
+    constantValues.appendChild(constantValuesTr);
 
     const constantValuesT = document.createElement('td');
     constantValuesT.id = idValue + "Y";
@@ -497,8 +585,6 @@ function messageRusltBarcodes(idValue, idValueEror) {
     constantValuesY.id = idValue + "T";
 
 
-    constantValues.appendChild(constantValuesTr);
-
 
     constantValuesTr.appendChild(constantValuesT);
     constantValuesTr.appendChild(constantValuesM);
@@ -506,6 +592,8 @@ function messageRusltBarcodes(idValue, idValueEror) {
     constantValuesTr.appendChild(constantValuesY);
 
 
+
+    
     const idValueE = document.getElementById(idValue);
 
 
@@ -517,22 +605,10 @@ function messageRusltBarcodes(idValue, idValueEror) {
 
 
 
-    const idValueA = document.getElementById(idValue + "A");
-
-    const erorWindosDivA = document.createElement('div');
-    erorWindosDivA.id = idValueEror + "A";
-    erorWindos.appendChild(erorWindosDivA);
-
-
-
-
 
     idValueE.setAttribute("onmouseover", "showTooltip(" + "'" + idValue + "'" + "," + "'" + idValueEror + "'" + ")");
     idValueE.setAttribute("onmouseout", "hideTooltip(" + "'" + idValueEror + "'" + ")");
 
-
-    idValueA.setAttribute("onmouseover", "showTooltip(" + "'" + idValue + "A" + "'" + "," + "'" + idValueEror + "A" + "'" + ")");
-    idValueA.setAttribute("onmouseout", "hideTooltip(" + "'" + idValueEror + "A" + "'" + ")");
 
 
 }
@@ -540,7 +616,18 @@ function messageRusltBarcodes(idValue, idValueEror) {
 
 
 
+function barcodEROR(idValue,idValueEror){
+  
+    const idValueY = document.getElementById(idValue);
 
+    const erorWindosDivY = document.createElement('div');
+    erorWindosDivY.id = idValueEror;
+    erorWindos.appendChild(erorWindosDivY);
+
+    idValueY.setAttribute("onmouseover", "showTooltip(" + "'" + idValue  + "'" + "," + "'" + idValueEror  + "'" + ")");
+    idValueY.setAttribute("onmouseout", "hideTooltip(" + "'" + idValueEror + "'" + ")");
+
+}
 
 
 
@@ -604,8 +691,8 @@ function DesignScreenGoesUp() {
         upFile.style.height = '250px';
         upFile.style.border = '1px solid #bdb8b8';
         dropzone.style.width = '85%';
-        dropzone.style.height = '50%';
-        dropzone.style.top = '58%';
+        dropzone.style.height = '55%';
+        dropzone.style.top = '60%';
         titelFile.style.display = 'block';
         filename.style.display = 'block';
         uploadicon.style.top = '70%';
@@ -613,14 +700,15 @@ function DesignScreenGoesUp() {
         uploadicon.style.width = '17%';
         uploadicon.style.height = '16%';
         icons.style.fontSize = '50px';
-        icons.style.top = '10px';
+        icons.style.top = '-3px';
         iconAndhandleDropP.style.fontSize = '15px';
+        iconAndhandleDropP.style.top = '-20px';
         uploadicon.style.width = '100%';
         uploadicon.style.height = '100%';
         uploadicon.style.top = '50%';
         uploadiconDiv.style.width = '17%';
         uploadiconDiv.style.height = '16%';
-        uploadiconDiv.style.top = '70%';
+        uploadiconDiv.style.top = '65%';
 
 
     }

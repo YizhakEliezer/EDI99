@@ -292,6 +292,7 @@ input:checked + .toggle-slider:before {
     margin-top: 50px;
     font-weight: bold;
     line-break:anywhere;
+  
 }
 
 
