@@ -212,48 +212,71 @@ async function orderFlat() {
     removeErrorMessageById("dateTimeHtml");
     messageRusltconstantValuesMain("dateTimeHtml", "dateTimeHtmlEror");
 
+    const dateTimeHtml1 = document.getElementById('dateTimeHtml');
+    var icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+
     if (booleneLength === false || isNaN(booleneLength)) {
-        iconXTime(dateTimeHtml);
-        dateTimeHtmlEror.innerHTML = "<br>" + ", פורמט תאריך הזמנה  שגוי , מספר התווים או מיקום התאריך בקובץ שגוי " + "<br>" + "  53-65 ,שורה 2" + "<br>";
+        dateTimeHtmlEror.innerHTML += "<br>" + ", פורמט תאריך הזמנה  שגוי , מספר התווים או מיקום התאריך בקובץ שגוי " + "<br>" + "  53-65 ,שורה 2" + "<br>";
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
     }
     if (year < 2023 || isNaN(year) || timeDocument.substring(0, 4) === "") {
-        iconXTime(dateTimeHtml);
         dateTimeHtmlEror.innerHTML += "<br>" + "53-65 , פורמט תאריך שנה שגוי  ,שורה 2" + "<br>";
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
     }
 
     if (month < 1 || month > 12 || isNaN(month) || timeDocument.substring(4, 6) === "") {
-        iconXTime(dateTimeHtml);
         dateTimeHtmlEror.innerHTML += "<br>" + "פורמט תאריך חודש שגוי,שורה 2, 53-65" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + timeDocument.substring(4, 6) + "<br>" + ": ערך רצוי" + "<br>" + "12>month>1" + "<br>";
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
     }
 
     if (day < 1 || day > 31 || isNaN(day) || timeDocument.substring(6, 8) === "") {
-        iconXTime(dateTimeHtml);
         dateTimeHtmlEror.innerHTML += "<br>" + "פורמט תאריך יום שגוי,שורה 2, 53-65" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + timeDocument.substring(6, 8) + "<br>" + ": ערך רצוי" + "<br>" + "31>day>1" + "<br>";
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
 
     }
 
     if (hour < 0 || hour > 24 || isNaN(hour) || timeDocument.substring(8, 10) === "") {
-        iconXTime(dateTimeHtml);
         dateTimeHtmlEror.innerHTML += "<br>" + "פורמט תאריך שעה שגוי,שורה 2, 53-65" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + timeDocument.substring(8, 10) + "<br>" + ": ערך רצוי" + "<br>" + "24>hour>0" + "<br>";
-
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
     }
 
     if (minute < 0 || minute > 59 || isNaN(minute) || timeDocument.substring(10, 12) === "") {
-        iconXTime(dateTimeHtml);
         dateTimeHtmlEror.innerHTML += "<br>" + "פורמט תאריך דקה שגוי,שורה 2, 53-65" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + timeDocument.substring(10, 12) + "<br>" + ": ערך רצוי" + "<br>" + "59>minute>0" + "<br>";
-
-
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
     }
 
-    dateTimeHtml.innerHTML += day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
-    dateTimeHtml.style.right = "32px";
 
-
-    var dateTimeHtml1 = document.getElementById('dateTimeHtml');
-    var icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+    icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
     if (icons.length > 0) {
-    } else {
-        iconVTime(dateTimeHtml);
+    } 
+    else {
+    dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+    iconV(dateTimeHtml);
+    
     }
 
 
@@ -261,10 +284,7 @@ async function orderFlat() {
 
 
 
-
-
-
-
+    
 
 
     //num Receiver line 1, 8-23 main div
@@ -517,7 +537,6 @@ async function orderFlat() {
         }
         
         else {
-            
             // if (!constantValuesStyle.innerHTML.includes('<p>')) {
             //     constantValuesStyle.style.display = "none";
             // }
@@ -969,7 +988,8 @@ function typeOrderF(typeOrder) {
         removeErrorMessageById("typeOrderHtmlEror");
         messageRusltconstantValuesMain("typeOrderFromeHtml", "typeOrderHtmlEror");
         typeOrderFromeHtml.innerHTML = "סוג הזמנה: לא ידוע"
-        typeOrderHtmlEror.innerHTML = "סוג ההזמנה חסר או שגוי ,שורה 2 ,8-11" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + typeOrder + "<br>" + ": קודי הזמנה תקינים" + "<br>" + "220,221,105,155,237,640,228,226,300";
+        typeOrderHtmlEror.innerHTML = "סוג ההזמנה חסר או שגוי ,שורה 2 ,8-11" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + typeOrder + "<br>" + ": קודי הזמנה תקינים" + "<br>" + "220=עסקה" + "<br>" +
+        "221=מסגרת" + "<br>" +"105=רגילה" + "<br>" +"155,237,640=הזמנת חלוקה" + "<br>" +"228=המלצה" + "<br>" +"226=ספקי קטיף" + "<br>" +"300=הזמנת אריזה";
         iconX(typeOrderFromeHtml);
     }
 
@@ -980,7 +1000,7 @@ function typeOrderF(typeOrder) {
 
 function statusOrderF(statusOrder) {
     //type order line 1, 8-11  main div
-    if (statusOrder.trim() === "9") {
+    if (statusOrder.trim().includes("9")) {
         removeErrorMessageById("statusOrderFromeHtml");
         removeErrorMessageById("statusOrderHtmlEror");
         messageRusltconstantValuesMain("statusOrderFromeHtml", "statusOrderHtmlEror");
@@ -988,7 +1008,7 @@ function statusOrderF(statusOrder) {
         iconV(statusOrderFromeHtml);
     }
 
-    else if (statusOrder.trim() === "1") {
+    else if (statusOrder.trim()==="1") {
         removeErrorMessageById("statusOrderFromeHtml");
         removeErrorMessageById("statusOrderHtmlEror");
         messageRusltconstantValuesMain("statusOrderFromeHtml", "statusOrderHtmlEror");
@@ -997,7 +1017,7 @@ function statusOrderF(statusOrder) {
     }
 
 
-    else if (statusOrder.trim() === "17") {
+    else if (statusOrder.trim().includes("17")) {
         removeErrorMessageById("statusOrderFromeHtml");
         removeErrorMessageById("statusOrderHtmlEror");
         messageRusltconstantValuesMain("statusOrderFromeHtml", "statusOrderHtmlEror");
@@ -1005,7 +1025,7 @@ function statusOrderF(statusOrder) {
         iconV(statusOrderFromeHtml);
     }
 
-    else if (statusOrder.trim() === "33") {
+    else if (statusOrder.trim().includes("33")) {
         removeErrorMessageById("statusOrderFromeHtml");
         removeErrorMessageById("statusOrderHtmlEror");
         messageRusltconstantValuesMain("statusOrderFromeHtml", "statusOrderHtmlEror");
@@ -1013,7 +1033,7 @@ function statusOrderF(statusOrder) {
         iconV(statusOrderFromeHtml);
     }
 
-    else if (statusOrder.trim() === "36") {
+    else if (statusOrder.trim().includes("36")) {
         removeErrorMessageById("statusOrderFromeHtml");
         removeErrorMessageById("statusOrderHtmlEror");
         messageRusltconstantValuesMain("statusOrderFromeHtml", "statusOrderHtmlEror");
@@ -1022,7 +1042,7 @@ function statusOrderF(statusOrder) {
     }
 
 
-    else if (statusOrder.trim() === "50E") {
+    else if (statusOrder.trim().includes("50E")) {
         removeErrorMessageById("statusOrderFromeHtml");
         removeErrorMessageById("statusOrderHtmlEror");
         messageRusltconstantValuesMain("statusOrderFromeHtml", "statusOrderHtmlEror");
@@ -1030,7 +1050,7 @@ function statusOrderF(statusOrder) {
         iconV(statusOrderFromeHtml);
     }
 
-    else if (statusOrder.trim() === "41") {
+    else if (statusOrder.trim().includes("41")) {
         removeErrorMessageById("statusOrderFromeHtml");
         removeErrorMessageById("statusOrderHtmlEror");
         messageRusltconstantValuesMain("statusOrderFromeHtml", "statusOrderHtmlEror");
@@ -1038,7 +1058,7 @@ function statusOrderF(statusOrder) {
         iconV(statusOrderFromeHtml);
     }
 
-    else if (statusOrder.trim() === "3") {
+    else if (statusOrder.trim().includes("3")) {
         removeErrorMessageById("statusOrderFromeHtml");
         removeErrorMessageById("statusOrderHtmlEror");
         messageRusltconstantValuesMain("statusOrderFromeHtml", "statusOrderHtmlEror");
@@ -1046,7 +1066,7 @@ function statusOrderF(statusOrder) {
         iconV(statusOrderFromeHtml);
     }
 
-    else if (statusOrder.trim() === "24") {
+    else if (statusOrder.trim().includes("24")) {
         removeErrorMessageById("statusOrderFromeHtml");
         removeErrorMessageById("statusOrderHtmlEror");
         messageRusltconstantValuesMain("statusOrderFromeHtml", "statusOrderHtmlEror");
@@ -1059,7 +1079,9 @@ function statusOrderF(statusOrder) {
         removeErrorMessageById("statusOrderHtmlEror");
         messageRusltconstantValuesMain("statusOrderFromeHtml", "statusOrderHtmlEror");
         statusOrderFromeHtml.innerHTML = "סטטוס הזמנה: לא ידוע"
-        statusOrderHtmlEror.innerHTML = "סטטוס ההזמנה חסר או שגוי ,שורה 2 ,50-53" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + statusOrder + "<br>" + ": קודי סטטוס תקינים" + "<br>" + "24,3,41,50,36,33,17,1,9";
+        statusOrderHtmlEror.innerHTML = "סטטוס ההזמנה חסר או שגוי ,שורה 2 ,50-53" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + statusOrder + "<br>" + ": קודי סטטוס תקינים" + "<br>" + 
+        "24=הזמנת רכש לספק" + "<br>" +"3=סגירת הזמנה שסופקה חלקית" + "<br>" +"41=סגירה מנהלית" + "<br>" +"50E=חדשה" + "<br>" +"36=שינוי שורות" + "<br>" +"33=שינוי כותרת" + "<br>" +
+        "17=הקפאה זמנית" + "<br>" +"1=ביטול הזמנה" + "<br>" +"9=הזמנה חדשה";
 
         iconX(statusOrderFromeHtml);
     }

@@ -439,7 +439,13 @@ cursor: pointer;
     top: 40px;
     width: 85%;
     left:7%;
+   
+   margin: 4px;
+   display: none; 
+ font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+ 
+
 
 #messageRuslt1 p{
      /* color: #474545;   */
@@ -448,14 +454,19 @@ cursor: pointer;
 position: relative;
 font-weight: bold;
 right: 20px;
-
+padding: 8px;
+margin: 4px;
 
 }
 
-#messageRuslt1 i{
-position: relative;
-left: 10px;
 
+
+
+#messageRuslt1 i{
+position: absolute;
+/* left: 10px; */
+right: -15px;
+top: 10px;
 }
 
 
@@ -490,8 +501,8 @@ font-weight: bold;
 
 #RowColumn{
     position: absolute;
-    right: 530px;
-    top: 650px;
+    right: 560px;
+    top: 665px;
     color: #3f3d3d;
 }
 
@@ -499,32 +510,21 @@ font-weight: bold;
 
 
 #constantValues{
+
+    
+    border: 1px solid #969292;
+    border-radius: 5px;
     position: relative;
     overflow: auto; /* or overflow: hidden; or overflow: scroll; depending on your preference */
-    word-wrap: break-word; /* or white-space: pre-wrap; to wrap long words */
+    word-wrap: break-word; 
     top: 50px;
     display: none;
-    right: 15px;
-    border: 1px solid #969292;
     width: 85%;
     left:7%;
-    
-
+   margin: 4px;
 }
 
 
-#constantValues p{
-  right: 25px;
-}
-
-
-#constantValues i{
-    position: absolute;
-     right: -15px;
-     top: 2px;
-
-
-}
 
 
 #messageRuslt1 h2{
@@ -535,101 +535,24 @@ font-weight: bold;
 
 }
 
-#main{
-    display:none;
-}
-
-/* #erorMss{
-    color: #ffffffb3;
-    background: #323232;
-        border-radius: 6px;
-text-align: center;
-font-size: 16px;
-position: absolute;
-overflow: auto; 
-word-wrap: break-word;
-height: 12%;
-width: 20%;
-left: 40%;
-top: 80%;
-display: none;
-border: 1px solid white; 
-
-text-align: center;
-}
-
-
-
-#erorMss p{
-    position: relative;
-    overflow: auto; 
-    word-wrap: break-word;
-    margin: 10px; 
-    color: #bad2e0;
-
-
-text-align: center;
-}
-
-
-#erorMss button {
-    position: relative;
-    overflow: auto; 
-    word-wrap: break-word;
-    color: #b5d0dd;
-    border-radius: 2px;
-      background: #444141; 
-        width: 50px;
-    height: 30px;
-font-size:17px; 
-border: 2px solid rgb(116, 104, 104); 
-cursor: pointer; 
-
-}
-
-#erorMss  button:hover {
-    background: #5a5555;
-    color: #94cde9;
-    border: 1px solid rgb(151, 140, 140); 
-}
-
-
-#erorMssSelect{
-    color: #b5d0dd;
-    background: #444141;
-    border: 2px solid rgb(116, 104, 104); 
-    position: relative;
-    cursor: pointer; 
-height: 25px;
-}
-
-
-#erorMss  select {
-    color: #b5d0dd;
-    background: #444141;
-    border: 2px solid rgb(116, 104, 104); 
-    position: relative;
-    cursor: pointer; 
-height: 25px;
-text-align: center;
-} */
 
 
 
 
 
 #barcodes{
-    position: relative;
-    overflow: auto; /* or overflow: hidden; or overflow: scroll; depending on your preference */
-    word-wrap: break-word; /* or white-space: pre-wrap; to wrap long words */
-    top: 60px;
-    /* display: none; */
-    right: 15px;
-    border: 1px solid #969292;
-    width: 85%;
-    left:7%;
-  font-size: 12px;
+border: 1px solid #969292;
+border-radius: 5px;
+position: relative;
+overflow: auto; /* or overflow: hidden; or overflow: scroll; depending on your preference */
+word-wrap: break-word; 
+top: 60px;
+display: none;
+width: 85%;
+left:7%;
+margin: 4px;
 display: none; 
+font-size: 12px;
 }
 
 
@@ -868,4 +791,28 @@ top: 80px;
 height: 25px;
 text-align: center;
 }
- 
+
+
+
+
+
+
+#saveFile {
+    position: absolute;
+    right: 530px;
+    top: 660px;
+cursor: pointer; 
+font-size: 20px;
+color: #74C0FC;
+/* color: #462d42; */
+display: none;
+font-weight: bold;
+}
+
+#saveFile:hover {
+
+    color: #d5afd8;
+
+}
+
+

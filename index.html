@@ -13,9 +13,16 @@
     <script type="text/javascript" src="supdesFlat.js"></script>
     <script type="text/javascript" src="orderFlat.js"></script>
     <script type="text/javascript" src="supdesHashavshevt.js"></script>
+    <script type="text/javascript" src="entryFlat.js"></script>
     <!--    Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <!-- Include html2canvas library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+   
+
 </head>
 
 <!--Activation of the test by an event when the user presses enter-->
@@ -127,10 +134,10 @@
     <textarea id="fileChek"></textarea>
     <!--Row and Column-->
     <div id="RowColumn"></div>
+    <!-- <button onclick="exportText()" id="buttonEror">ייצא טקסט לקובץ</button> -->
 
 
-
-
+    <i class="fa-solid fa-file-arrow-down"   onclick="exportText()" id="saveFile"></i>
 
 
     <!--eror type mass-->
@@ -153,8 +160,6 @@
         <!-- <button id="buttonEror" onclick="document.getElementById('erorMss').style.display= 'none'">סגור</button> -->
     <!-- </div> --> 
 
-
-
 </div>
     
 
@@ -163,17 +168,88 @@
 
 
 
-        const textarea = document.getElementById("fileChek");
-        const output = document.getElementById("RowColumn");
 
-        textarea.addEventListener("mousemove", function (event) {
-            const cursorPosition = textarea.selectionStart;
-            const text = textarea.value;
-            const row = text.substr(0, cursorPosition).split("\n").length;
-            const col = cursorPosition - text.lastIndexOf("\n", cursorPosition - 1);
 
-            output.textContent = `Row: ${row}, Column: ${col}`;
-        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function exportText() {
+    const text = document.getElementById("fileChek").value;
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = document.getElementById('file-name').innerHTML+"New.txt";
+    a.click();
+}
+
+
+
+
+
+
+
+
+
+
+
+const textarea = document.getElementById("fileChek");
+const output = document.getElementById("RowColumn");
+
+textarea.addEventListener("mouseover", startUpdating);
+textarea.addEventListener("mouseout", stopUpdating);
+
+let intervalId;
+
+function startUpdating() {
+    intervalId = setInterval(updateCursorPosition, 0); 
+}
+
+function stopUpdating() {
+    clearInterval(intervalId);
+}
+
+function updateCursorPosition() {
+    const cursorPosition = textarea.selectionStart;
+    const text = textarea.value;
+    const row = text.substr(0, cursorPosition).split("\n").length;
+    const col = cursorPosition - text.lastIndexOf("\n", cursorPosition - 1);
+
+    output.textContent = `Row: ${row}, Column: ${col}`;
+}
+
+
 
 
 

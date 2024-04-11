@@ -106,6 +106,21 @@ function checkTextarea() {
 
         }
 
+
+
+        else if(fileChekValue.includes("MMDR01")){
+            selectedOption = null;
+            selectCreated = false;
+            removeErrorMessageById("errorMssTypeFlat");
+            removeErrorMessageById("errorMssType");
+                //  console.log("MMOR01");
+                
+                entryFlat();
+
+        }
+
+
+
          else {
              removeErrorMessageById("errorMssType");
             
@@ -308,6 +323,11 @@ function runSelectedFunctionType() {
         removeElemntmessageRuslt();
          orderFlat();
     } 
+
+    else if (selectedOptionType === "Flat file" && selectedOptionType1 === "entry") {
+        removeElemntmessageRuslt();
+         entryFlat();
+    } 
     
     
     else {
@@ -331,7 +351,7 @@ function runSelectedFunction() {
          orderFlat();
     } 
     else if (selectedOption === "entry") {
-        console.log("entry");
+        entryFlat();
     }
 }
 
@@ -457,7 +477,6 @@ function messageRusltconstantValuesMain(idValue, idValueEror) {
     const erorWindosDiv = document.createElement('div');
     erorWindosDiv.id = idValueEror;
     erorWindos.appendChild(erorWindosDiv);
-
 
 
     idValueE.setAttribute("onmouseover", "showTooltip(" + "'" + idValue + "'" + "," + "'" + idValueEror + "'" + ")");
@@ -680,8 +699,11 @@ function DesignScreenGoesUp() {
     const iconAndhandleDropP = document.getElementById('iconAndhandleDropP');
     const uploadiconDiv = document.getElementById('upload-iconDiv');
     const fileChek = document.getElementById("fileChek");
+    const saveFile = document.getElementById("saveFile");
+
 
     if (fileContent != undefined) {
+        saveFile.style.display = 'block';
         fileChek.style.display = 'block';
         messageRuslt1.style.display = 'block';
         upFile.style.position = 'absolute';

@@ -203,52 +203,85 @@ async function supdesFlat() {
     removeErrorMessageById("dateTimeHtmlEror");
     removeErrorMessageById("dateTimeHtml");
     messageRusltconstantValuesMain("dateTimeHtml", "dateTimeHtmlEror");
+    const dateTimeHtml1 = document.getElementById('dateTimeHtml');
+    var icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
 
     if (booleneLength === false || isNaN(booleneLength)) {
-        iconXTime(dateTimeHtml);
-        dateTimeHtmlEror.innerHTML = "<br>" + ", פורמט תאריך הזמנה  שגוי , מספר התווים או מיקום התאריך בקובץ שגוי " + "<br>" + "  53-65 ,שורה 2" + "<br>";
+        dateTimeHtmlEror.innerHTML += "<br>" + ", פורמט תאריך הזמנה  שגוי , מספר התווים או מיקום התאריך בקובץ שגוי " + "<br>" + "  53-65 ,שורה 2" + "<br>";
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
     }
     if (year < 2023 || isNaN(year) || timeDocument.substring(0, 4) === "") {
-        iconXTime(dateTimeHtml);
         dateTimeHtmlEror.innerHTML += "<br>" + "53-65 , פורמט תאריך שנה שגוי  ,שורה 2" + "<br>";
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
     }
 
     if (month < 1 || month > 12 || isNaN(month) || timeDocument.substring(4, 6) === "") {
-        iconXTime(dateTimeHtml);
         dateTimeHtmlEror.innerHTML += "<br>" + "פורמט תאריך חודש שגוי,שורה 2, 53-65" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + timeDocument.substring(4, 6) + "<br>" + ": ערך רצוי" + "<br>" + "12>month>1" + "<br>";
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
     }
 
     if (day < 1 || day > 31 || isNaN(day) || timeDocument.substring(6, 8) === "") {
-        iconXTime(dateTimeHtml);
         dateTimeHtmlEror.innerHTML += "<br>" + "פורמט תאריך יום שגוי,שורה 2, 53-65" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + timeDocument.substring(6, 8) + "<br>" + ": ערך רצוי" + "<br>" + "31>day>1" + "<br>";
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
 
     }
 
     if (hour < 0 || hour > 24 || isNaN(hour) || timeDocument.substring(8, 10) === "") {
-        iconXTime(dateTimeHtml);
         dateTimeHtmlEror.innerHTML += "<br>" + "פורמט תאריך שעה שגוי,שורה 2, 53-65" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + timeDocument.substring(8, 10) + "<br>" + ": ערך רצוי" + "<br>" + "24>hour>0" + "<br>";
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
 
     }
 
     if (minute < 0 || minute > 59 || isNaN(minute) || timeDocument.substring(10, 12) === "") {
-        iconXTime(dateTimeHtml);
         dateTimeHtmlEror.innerHTML += "<br>" + "פורמט תאריך דקה שגוי,שורה 2, 53-65" + "<br>" + " :ערך שנמצא בקובץ " + "<br>" + timeDocument.substring(10, 12) + "<br>" + ": ערך רצוי" + "<br>" + "59>minute>0" + "<br>";
+        dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+        icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+        if (icons.length === 0) {
+            iconX(dateTimeHtml);
+        }
 
 
     }
 
-    dateTimeHtml.innerHTML += day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
-    dateTimeHtml.style.right = "32px";
+    // dateTimeHtml.innerHTML += day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+    // dateTimeHtml.style.right = "32px";
 
 
-    var dateTimeHtml1 = document.getElementById('dateTimeHtml');
-    var icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+    // var dateTimeHtml1 = document.getElementById('dateTimeHtml');
+    // var icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+    // if (icons.length > 0) {
+    // } else {
+    //     iconVTime(dateTimeHtml);
+    // }
+
+    icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
     if (icons.length > 0) {
-    } else {
-        iconVTime(dateTimeHtml);
+    } 
+    else {
+    dateTimeHtml.innerHTML = day + "/" + month + "/" + year + "-" + hour + ":" + minute + " :תאריך  תעודה";
+    iconV(dateTimeHtml);
+    
     }
-
-
 
 
 
@@ -862,7 +895,6 @@ async function supdesFlat() {
         }
 
     }
-
 
 
 
